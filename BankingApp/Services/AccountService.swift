@@ -15,7 +15,7 @@ enum NetworkError: Error {
 class AccountService {
     private init() {}
     static let shared = AccountService()
-    func getAllAccounts(completion: @escaping (Result<[Account],NetworkError>) -> Void) {
+    func getAllAccounts(completion: @escaping (Result<[Account]?,NetworkError>) -> Void) {
         
         guard let url = URL.urlForAccounts()
         else {
