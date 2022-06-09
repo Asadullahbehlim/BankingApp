@@ -16,7 +16,6 @@ struct Account: Codable {
     var name: String
     var balance: Double
     let accountType: AccountType
-    
 }
 
 extension AccountType {
@@ -24,7 +23,6 @@ extension AccountType {
         switch self {
         case .checking: return "Checking"
         case .saving: return "Saving"
-            
         }
     }
 }

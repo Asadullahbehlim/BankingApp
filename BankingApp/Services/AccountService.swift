@@ -12,9 +12,39 @@ enum NetworkError: Error {
     case noData
     case decodingError
 }
-class AccountService {
+ class AccountService {
     private init() {}
     static let shared = AccountService()
+    
+ func createAccount(createAccountRequest: CreateAccountRequest, completion: @escaping (Result<CreateAccountResponse, NetworkError>) -> Void) {
+     
+        guard let url = URL.urlForCreateAccounts() else {
+            return completion(.failure(.badURL))
+        }
+        
+     var request = URLRequest(url: url)
+     request.httpMethod = "POST"
+     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+     request.httpBody = try? JSONEncoder().encode(createAccountRequest)
+    
+     URLSession.shared.dataTask(with: request) {
+         data, response, error in
+         guard let data = data, error == nil else {
+             return completion(.failure(.badURL))
+         }
+         
+         let createAccountResponse = try? JSONDecoder().decode(CreateAccountResponse.self, from: data)
+         
+      if   let createAccountResponse = createAccountResponse {
+             completion(.success(createAccountResponse))
+             
+         }
+         else {
+             completion(.failure(.decodingError))
+         }
+     }
+ }
+    
     func getAllAccounts(completion: @escaping (Result<[Account]?,NetworkError>) -> Void) {
         
         guard let url = URL.urlForAccounts()
