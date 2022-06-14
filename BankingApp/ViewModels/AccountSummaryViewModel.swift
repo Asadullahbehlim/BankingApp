@@ -11,7 +11,7 @@ class AccountSummaryViewModel : ObservableObject {
 
     private var _accountsModel = [Account]()
     @Published var accounts: [AccountViewModel] = [AccountViewModel]()
-  //  var accounts = [AccountViewModel]
+ 
 
 var total: Double {
     _accountsModel.map({$0.balance}).reduce(0,+)
@@ -24,7 +24,9 @@ var total: Double {
                case .success(let accounts):
                    if let accounts = accounts{
                    self._accountsModel = accounts
-                   self.accounts = accounts.map(AccountViewModel.init)
+                       DispatchQueue.main.async {
+                           self.accounts = accounts.map(AccountViewModel.init)
+                       }
                    }
                case .failure(let error):
                    print(error.localizedDescription)
@@ -52,10 +54,3 @@ class AccountViewModel {
         account.balance
     }
 }
-
-
-
-
-
-
-

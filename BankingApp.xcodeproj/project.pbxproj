@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41454797285342C80004CCEF /* AddAccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41454796285342C80004CCEF /* AddAccountScreen.swift */; };
 		415DAE4F2848718B007791E6 /* BankingAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415DAE4E2848718B007791E6 /* BankingAppApp.swift */; };
 		415DAE512848718B007791E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415DAE502848718B007791E6 /* ContentView.swift */; };
 		415DAE532848718C007791E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415DAE522848718C007791E6 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41454796285342C80004CCEF /* AddAccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountScreen.swift; sourceTree = "<group>"; };
 		415DAE4B2848718B007791E6 /* BankingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415DAE4E2848718B007791E6 /* BankingAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankingAppApp.swift; sourceTree = "<group>"; };
 		415DAE502848718B007791E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				4164536B2849E6960023719D /* AccountSummaryScreen.swift */,
+				41454796285342C80004CCEF /* AddAccountScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				415DAE66284872C6007791E6 /* View+Extensions.swift in Sources */,
 				41BF5E85285060F40084226D /* CreateAccountResponse.swift in Sources */,
 				416DAD9E2848A9B40018C8D8 /* AccountService.swift in Sources */,
+				41454797285342C80004CCEF /* AddAccountScreen.swift in Sources */,
 				415DAE4F2848718B007791E6 /* BankingAppApp.swift in Sources */,
 				41BF5E8328505A180084226D /* CreateAccountRequest.swift in Sources */,
 				415DAE692848754D007791E6 /* Account.swift in Sources */,

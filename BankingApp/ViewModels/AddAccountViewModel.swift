@@ -22,7 +22,7 @@ extension AddAccountViewModel {
     private var isBalanceValid: Bool {
         guard let userBalance = Double(balance) else {
             return false
-        }
+        } // Computed property
         return userBalance <= 0 ? false:true
     }
     
@@ -36,7 +36,10 @@ extension AddAccountViewModel {
         }
         
         if !errors.isEmpty {
-            self.errorMessage = errors.joined(separator: "\n")
+            DispatchQueue.main.async {
+                self.errorMessage = errors.joined(separator: "\n")
+            }
+            
             return false
         }
         return true
@@ -54,7 +57,23 @@ extension AddAccountViewModel {
         
         AccountService.shared.createAccount(createAccountRequest: createAccountReq) {
             result in
+            switch result{
+            case .success(let response) :
+                if response.success {
+                    Completion(true)
+                } else {
+                    if let error = response.error
+                    {
+                        DispatchQueue.main.async {
+                            self.errorMessage = error
+                        }
+                       
+                        Completion(false)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
-

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountSummaryScreen: View {
  @ObservedObject private var AccountSummaryVM : AccountSummaryViewModel = AccountSummaryViewModel()
+    @State private var isPresented:Bool = false
     
     var body: some View {
         VStack {
@@ -22,15 +23,23 @@ struct AccountSummaryScreen: View {
             
         }
         }
-       .onAppear(){
+       .onAppear{
                 self.AccountSummaryVM.getAllAccounts()
             }
+       .sheet(isPresented: $isPresented, onDismiss: {
+           self.AccountSummaryVM.getAllAccounts()
+       }) {
+           AddAccountScreen()
+       }
+       .navigationBarItems(trailing: Button("Add Account")
+            { self.isPresented = true
+           
+       })
             .navigationTitle("Account Summary")
             .embedInNavigationView()
             
         }
     }
-
 
 struct AccountSummaryScreen_Previews: PreviewProvider {
     static var previews: some View {

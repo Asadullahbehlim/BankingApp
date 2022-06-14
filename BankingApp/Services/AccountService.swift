@@ -30,19 +30,19 @@ enum NetworkError: Error {
      URLSession.shared.dataTask(with: request) {
          data, response, error in
          guard let data = data, error == nil else {
-             return completion(.failure(.badURL))
+             return completion(.failure(.noData))
          }
          
          let createAccountResponse = try? JSONDecoder().decode(CreateAccountResponse.self, from: data)
          
-      if   let createAccountResponse = createAccountResponse {
+      if let createAccountResponse = createAccountResponse {
              completion(.success(createAccountResponse))
              
          }
          else {
              completion(.failure(.decodingError))
          }
-     }
+     }.resume()
  }
     
     func getAllAccounts(completion: @escaping (Result<[Account]?,NetworkError>) -> Void) {
@@ -57,13 +57,17 @@ enum NetworkError: Error {
                 return completion(.failure(.noData))
             }
             
-        guard let accounts = try? JSONDecoder().decode([Account].self, from: data) else {
-            return completion(.failure(.decodingError))
+            let accounts = try? JSONDecoder().decode([Account].self, from: data)
+            if accounts == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(accounts))
+                
+            }
             
-        }
-        return completion(.success(accounts))
-                       
+            
         }.resume()
+        
     }
     
 }
