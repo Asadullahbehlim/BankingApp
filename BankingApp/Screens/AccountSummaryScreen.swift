@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+enum ActiveSheet {
+    case addAccount
+    case transferFunds
+}
 struct AccountSummaryScreen: View {
  @ObservedObject private var AccountSummaryVM : AccountSummaryViewModel = AccountSummaryViewModel()
     @State private var isPresented:Bool = false
-    
+    @State private var activeSheet: ActiveSheet = .addAccount
+   
     var body: some View {
         VStack {
         GeometryReader { g in
@@ -19,6 +24,10 @@ struct AccountSummaryScreen: View {
                     .frame(height: g.size.height/2)
                 Text("\(self.AccountSummaryVM.total.formatAsCurrency())")
                 Spacer()
+                Button("Transfer Funds") {
+                    activeSheet = .transferFunds
+                    isPresented = true
+                }.padding()
             }
             
         }
@@ -27,12 +36,21 @@ struct AccountSummaryScreen: View {
                 self.AccountSummaryVM.getAllAccounts()
             }
        .sheet(isPresented: $isPresented, onDismiss: {
+           // Get All Accounts
            self.AccountSummaryVM.getAllAccounts()
        }) {
-           AddAccountScreen()
+           if activeSheet == .transferFunds {
+               TransferFundsScreen()
+           }
+           else if activeSheet == .addAccount {
+               AddAccountScreen()
+           }
+          
        }
        .navigationBarItems(trailing: Button("Add Account")
-            { self.isPresented = true
+        {
+           self.activeSheet = .addAccount
+           self.isPresented = true
            
        })
             .navigationTitle("Account Summary")

@@ -69,6 +69,33 @@ enum NetworkError: Error {
         }.resume()
         
     }
-    
+     func transferFunds(transferFundRequest: TransferFundRequest,completion:@escaping (Result<TransferFundResponse,NetworkError>) -> Void){
+             
+             //Create a url for http request else badURL
+             guard let url = URL.urlForCreateAccounts() else{
+                 return completion(.failure(.badURL))
+             }
+             
+             var request = URLRequest(url: url)
+             request.httpMethod = "POST"
+             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+             request.httpBody = try? JSONEncoder().encode(transferFundRequest)
+             
+             URLSession.shared.dataTask(with:request){data,response,error in
+                 
+             //Data Extracted Succesfully else noData
+             guard let data = data , error == nil else {
+             return completion(.failure(.noData))
+             }
+             
+             guard let transferfundresponse = try? JSONDecoder().decode(TransferFundResponse.self, from: data) else {
+             return completion(.failure(.decodingError))
+             }
+                 
+             return completion(.success(transferfundresponse))
+                 
+             }.resume()
+         }
+     
 }
 
