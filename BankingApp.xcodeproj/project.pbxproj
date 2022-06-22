@@ -27,6 +27,7 @@
 		41990B292851AC4D00B00B5F /* AddAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41990B282851AC4D00B00B5F /* AddAccountViewModel.swift */; };
 		41BF5E8328505A180084226D /* CreateAccountRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BF5E8228505A180084226D /* CreateAccountRequest.swift */; };
 		41BF5E85285060F40084226D /* CreateAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BF5E84285060F40084226D /* CreateAccountResponse.swift */; };
+		41E9512F2862E643006ED507 /* TransferFundsAccountSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9512E2862E643006ED507 /* TransferFundsAccountSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		41990B282851AC4D00B00B5F /* AddAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewModel.swift; sourceTree = "<group>"; };
 		41BF5E8228505A180084226D /* CreateAccountRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountRequest.swift; sourceTree = "<group>"; };
 		41BF5E84285060F40084226D /* CreateAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountResponse.swift; sourceTree = "<group>"; };
+		41E9512E2862E643006ED507 /* TransferFundsAccountSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFundsAccountSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				4164536D2849EBC10023719D /* AccountListView.swift */,
+				41E9512E2862E643006ED507 /* TransferFundsAccountSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				41454797285342C80004CCEF /* AddAccountScreen.swift in Sources */,
 				415DAE4F2848718B007791E6 /* BankingAppApp.swift in Sources */,
 				41BF5E8328505A180084226D /* CreateAccountRequest.swift in Sources */,
+				41E9512F2862E643006ED507 /* TransferFundsAccountSelectionView.swift in Sources */,
 				415DAE692848754D007791E6 /* Account.swift in Sources */,
 				41829B1D2849BD84007415DC /* AccountSummaryViewModel.swift in Sources */,
 				4191F02F285C32BF000A1799 /* TransferFundRequest.swift in Sources */,

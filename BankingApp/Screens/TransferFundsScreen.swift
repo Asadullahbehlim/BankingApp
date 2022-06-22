@@ -11,6 +11,7 @@ import SwiftUI
 
 struct TransferFundsScreen: View {
     // MARK: - property
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var TransferFundsVM = TransferFundsViewModel()
     @State private var showSheet: Bool = false
     @State private var isFromAccount: Bool = false
@@ -33,16 +34,22 @@ struct TransferFundsScreen: View {
 
     // MARK: - Body
     var body: some View {
-   
+        ScrollView {
         VStack {
             AccountListView(accounts: TransferFundsVM.accounts)
-                .frame(height: 300)
+                .frame(height: 200)
+            
             TransferFundsAccountSelectionView(TransferFundsVM: TransferFundsVM, showSheet: $showSheet, isFromAccount: $isFromAccount)
            Spacer()
             .onAppear {
                 TransferFundsVM.populateAccounts()
             }
+           Text(self.TransferFundsVM.message ?? "")
+            
             Button("Submit Transfer") {
+                self.TransferFundsVM.submitTransfer {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
                 
             }.padding()
                 
@@ -50,6 +57,7 @@ struct TransferFundsScreen: View {
                 ActionSheet(title: Text("Transfer Funds"), message: Text("Choose an account"), buttons:self.actionSheetButton)
         }
             
+        }
         }.navigationTitle("Transfer Funds")
         .embedInNavigationView()
        
@@ -57,42 +65,3 @@ struct TransferFundsScreen: View {
         }
     
     }
-
-struct TransferFundsAccountSelectionView: View {
-    @ObservedObject  var TransferFundsVM : TransferFundsViewModel
-    
-    @Binding var showSheet: Bool
-    @Binding var isFromAccount: Bool
-    var body: some View {
-        VStack(spacing: 10) {
-            Button("From \(TransferFundsVM.fromAccountType)") {
-                self.isFromAccount = true
-                showSheet.toggle()
-            }.padding()
-            .frame(maxWidth: .infinity)
-            .background(.red)
-            .foregroundColor(.white)
-            
-            Button("To \(TransferFundsVM.toAccountType)") {
-                self.isFromAccount = false
-                showSheet.toggle()
-            }.padding()
-            .frame(maxWidth:  .infinity)
-            .background(.green)
-            .foregroundColor(.white)
-            .opacity(TransferFundsVM.fromAccount == nil ? 0.5:1.0)
-            .disabled(TransferFundsVM.fromAccount == nil )
-         
-            TextField("Amount", text: $TransferFundsVM.amount)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-        }
-    
-}
-}
-
-struct TransferFundsScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TransferFundsScreen()
-    }
-}
-
