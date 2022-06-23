@@ -58,7 +58,8 @@ struct TransferFundsScreen: View {
         }
             
         }
-        }.navigationTitle("Transfer Funds")
+       }
+        .navigationTitle("Transfer Funds")
         .embedInNavigationView()
        
             
